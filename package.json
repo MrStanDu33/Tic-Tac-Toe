@@ -6,7 +6,9 @@
   "type": "module",
   "scripts": {
     "preinstall": "link-module-alias clean || echo",
-    "postinstall": "link-module-alias"
+    "postinstall": "link-module-alias",
+    "dev": "./node_modules/webpack-cli/bin/cli.js serve",
+    "build": "./node_modules/webpack-cli/bin/cli.js build"
   },
   "repository": {
     "type": "git",
