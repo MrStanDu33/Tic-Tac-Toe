@@ -1,4 +1,18 @@
+/**
+ * @file Game class file.
+ * @author DANIELS-ROTH Stan <contact@daniels-roth-stan.fr>
+ */
+
 export default class Game {
+  /**
+   * @function constructor
+   * @description Initializes the game and the grid and prints it.
+   *
+   * @param { object } options               - Settings object that configures the game.
+   * @param { string } options.parentElement - Game's Parent CSS selector.
+   * @param { number } options.size          - Game's grid columns and rows count.
+   * @param { Array }  options.players       - Game's players list.
+   */
   constructor(options) {
     this.validateOptions(options);
 
@@ -42,6 +56,7 @@ export default class Game {
     cellElement.innerText = actualPlayer.marker;
 
     const gameStatus = this.isGameOver();
+    console.log(gameStatus);
     if (gameStatus !== false) {
       this.endGame(gameStatus);
       return;
@@ -153,8 +168,9 @@ export default class Game {
   }
 
   /**
+   * @description Test.
    *
-   * @returns
+   * @returns { void }
    */
   searchForTie() {
     if (this.searchForHorizontalWin() !== null) return null;

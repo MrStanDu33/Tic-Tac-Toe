@@ -15,8 +15,13 @@ jobs:
         run: |
           npm run build
 
+      - name: Build docs 🏗️
+        uses: andstor/jsdoc-action@v1.2.1
+        with:
+          config_file: jsdoc.json
+
       - name: Deploy 🚀
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: dist
+          publish_dir: dist4

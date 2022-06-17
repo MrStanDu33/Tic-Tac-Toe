@@ -1,3 +1,8 @@
+/**
+ * @file Player class file.
+ * @author DANIELS-ROTH Stan <contact@daniels-roth-stan.fr>
+ */
+
 export default class Player {
   constructor(options) {
     this.validateOptions(options);
