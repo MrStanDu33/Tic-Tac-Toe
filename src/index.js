@@ -1,5 +1,6 @@
 import Game from '$src/classes/Game';
 import Player from '$src/classes/Player';
+import '$src/style.css';
 
 window.game = new Game({
   size: 3,

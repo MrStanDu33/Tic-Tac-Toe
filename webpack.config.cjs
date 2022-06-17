@@ -12,13 +12,21 @@ module.exports = {
   mode: 'development',
   output: {
     filename: '[name].bundle.js',
-    path: path.resolve(__dirname, 'public'),
-    //    clean: true,
+    path: path.resolve(__dirname, 'dist'),
+    clean: true,
   },
   plugins: [new HtmlWebpackPlugin({ template: './public/index.html' })],
   resolve: {
     alias: {
       $src: path.resolve(__dirname, 'src/'),
     },
+  },
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader'],
+      },
+    ],
   },
 };
