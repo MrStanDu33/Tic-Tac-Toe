@@ -7,8 +7,9 @@
   "scripts": {
     "preinstall": "link-module-alias clean || echo",
     "postinstall": "link-module-alias",
-    "dev": "./node_modules/webpack-cli/bin/cli.js serve",
-    "build": "./node_modules/webpack-cli/bin/cli.js build"
+    "dev": "./node_modules/.bin/webpack-cli serve",
+    "build": "./node_modules/.bin/webpack-cli build",
+    "lint": "./node_modules/.bin/eslint '**/*.js' --ignore-path .gitignore"
   },
   "repository": {
     "type": "git",

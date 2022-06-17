@@ -6,7 +6,8 @@
   },
   "parserOptions": {
     "ecmaVersion": "latest",
-    "parser": "babel-eslint"
+    "parser": "babel-eslint",
+    "sourceType": "module"
   },
   "extends": ["airbnb-base", "plugin:prettier/recommended", "plugin:import/recommended", "plugin:jsdoc/recommended"],
   "plugins": ["prettier", "jsdoc"],
