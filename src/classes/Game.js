@@ -3,6 +3,7 @@ export default class Game {
     this.validateOptions(options);
 
     this.playerTurn = 0;
+    this.gameOver = false;
 
     this.grid = this.initializeGrid();
     this.buildGrid();
@@ -27,6 +28,8 @@ export default class Game {
   }
 
   addPlayerToCell(event) {
+    if (this.gameOver) return;
+
     const cellElement = event.target;
     const { row, col } = cellElement.dataset;
     const cell = this.grid[row][col];
@@ -159,6 +162,7 @@ export default class Game {
   }
 
   endGame({ fullRow, fullCol, fullDiag }) {
+    this.gameOver = true;
     const endGameStatusContainer = document.createElement('h1');
     endGameStatusContainer.id = 'end-game-status-container';
 
