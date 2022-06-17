@@ -19,6 +19,9 @@
 .game-grid-cell {
   height: 200px;
   width: 200px;
+  text-align: center;
+  line-height: 200px;
+  font-size: 40px;
 }
 
 .game-grid-cell:not(:last-of-type) {
