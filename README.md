@@ -3,8 +3,8 @@
 ## Project status
 
 [![wakatime](https://wakatime.com/badge/user/06011a48-a97d-4bc2-a58e-60ce7ff5a743/project/7ee07462-6b9a-4096-b26a-76fe75982061.svg)](https://wakatime.com/badge/user/06011a48-a97d-4bc2-a58e-60ce7ff5a743/project/7ee07462-6b9a-4096-b26a-76fe75982061)
-![GitHub Build Status](https://github.com/MrStanDu33/Tic-Tac-Toe/actions/workflows/build.yml/badge.svg)
-![GitHub Lint Status](https://github.com/MrStanDu33/Tic-Tac-Toe/actions/workflows/lint.yml/badge.svg)
+[![GitHub Build Status](https://github.com/MrStanDu33/Tic-Tac-Toe/actions/workflows/build.yml/badge.svg)](https://github.com/MrStanDu33/Tic-Tac-Toe/actions/workflows/build.yml)
+[![GitHub Lint Status](https://github.com/MrStanDu33/Tic-Tac-Toe/actions/workflows/lint.yml/badge.svg)](https://github.com/MrStanDu33/Tic-Tac-Toe/actions/workflows/lint.yml)
 
 ## About
 
