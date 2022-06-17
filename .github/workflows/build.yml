@@ -18,10 +18,11 @@ jobs:
       - name: Build docs 🏗️
         uses: andstor/jsdoc-action@v1.2.1
         with:
-          config_file: jsdoc.json
+          config_file: ./jsdoc.json
+          output_dir: ./dist/docs
 
       - name: Deploy 🚀
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: dist4
+          publish_dir: dist
