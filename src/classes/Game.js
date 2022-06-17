@@ -152,6 +152,10 @@ export default class Game {
     return wonLastDiag ? lastDiag : null;
   }
 
+  /**
+   *
+   * @returns
+   */
   searchForTie() {
     if (this.searchForHorizontalWin() !== null) return null;
     if (this.searchForVerticalWin() !== null) return null;

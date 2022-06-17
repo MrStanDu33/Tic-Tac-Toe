@@ -8,24 +8,25 @@
     "ecmaVersion": "latest",
     "parser": "babel-eslint"
   },
-  "extends": ["airbnb-base", "plugin:prettier/recommended", "plugin:jsdoc/recommended", "plugin:import/recommended"],
+  "extends": ["airbnb-base", "plugin:prettier/recommended", "plugin:import/recommended", "plugin:jsdoc/recommended"],
   "plugins": ["prettier", "jsdoc"],
   "rules": {
     "implicit-arrow-linebreak": "off",
     "function-paren-newline": "off",
-    "jsdoc/tag-lines": "off",
-
-    // 'jsdoc/check-examples': 1, see https://github.com/gajus/eslint-plugin-jsdoc#eslint-plugin-jsdoc-rules-tag-lines
-    "jsdoc/check-indentation": ["error"],
-    "jsdoc/check-param-names": [
-      "error",
+    "jsdoc/require-jsdoc": [
+      1,
       {
-        "checkRestProperty": true,
-        "allowExtraTrailingParamDocs": true,
-        "useDefaultObjectProperties": true
+        "require": {
+          "ArrowFunctionExpression": true,
+          "ClassDeclaration": true,
+          "ClassExpression": true,
+          "FunctionDeclaration": true,
+          "FunctionExpression": true,
+          "MethodDefinition": true
+        },
+        "exemptEmptyConstructors": false
       }
-    ],
-    "jsdoc/check-syntax": ["error", true]
+    ]
   },
   "settings": {
     "import/resolver": {
