@@ -30,7 +30,7 @@ class Player {
    * @param   { string } options.name   - Player's name.
    * @param   { number } options.marker - Player's marker to use in cells.
    *
-   * @returns { Player }                Player's instance.
+   * @returns { Player }                Player instance.
    */
   constructor(options) {
     this.validateOptions(options);

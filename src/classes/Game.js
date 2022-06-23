@@ -78,10 +78,10 @@ class Game {
   /**
    * @description Validate if all required parameters are present and wether they are correct.
    *
-   * @param   { object } options               - Settings object that configures the game.
-   * @param   { string } options.parentElement - Game's Parent CSS selector.
-   * @param   { number } options.size          - Game's grid columns and rows count.
-   * @param   { Array }  options.players       - Game's players list.
+   * @param   { object }   options               - Settings object that configures the game.
+   * @param   { string }   options.parentElement - Game's Parent CSS selector.
+   * @param   { number }   options.size          - Game's grid columns and rows count.
+   * @param   { Player[] } options.players       - Game's players list.
    *
    * @throws  { TypeError|Error } Throws validation error.
    *
