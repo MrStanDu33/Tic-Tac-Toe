@@ -57,12 +57,12 @@ class Game {
   /**
    * @description Initializes the game and the grid and prints it.
    *
-   * @param   { object } options               - Settings object that configures the game.
-   * @param   { string } options.parentElement - Game's Parent CSS selector.
-   * @param   { number } options.size          - Game's grid columns and rows count.
-   * @param   { Player[] }  options.players       - Game's players list.
+   * @param   { object }   options               - Settings object that configures the game.
+   * @param   { string }   options.parentElement - Game's Parent CSS selector.
+   * @param   { number }   options.size          - Game's grid columns and rows count.
+   * @param   { Player[] } options.players       - Game's players list.
    *
-   * @returns { Game } Instance.
+   * @returns { Game }                           Game instance.
    */
   constructor(options) {
     this.validateOptions(options);
