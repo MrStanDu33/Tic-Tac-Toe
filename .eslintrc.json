@@ -17,12 +17,12 @@
     "jsdoc/check-access": "off",
     "jsdoc/check-alignment": 2,
     "jsdoc/check-examples": 0,
-    "jsdoc/check-indentation": [2, { "excludeTags": ["example"] }],
+    "jsdoc/check-indentation": "off",
     "jsdoc/check-line-alignment": [2, "always"],
     "jsdoc/check-param-names": [2, { "checkRestProperty": true, "allowExtraTrailingParamDocs": false }],
     "jsdoc/check-property-names": 2,
     "jsdoc/check-syntax": 2,
-    "jsdoc/check-tag-names": 2,
+    "jsdoc/check-tag-names": [2, { "definedTags": ["category"] }],
     "jsdoc/check-types": 2,
     "jsdoc/check-values": 2,
     "jsdoc/empty-tags": 2,
@@ -34,7 +34,7 @@
       {
         "noZeroLineText": true,
         "noSingleLineBlocks": true,
-        "singleLineTags": ["lends"],
+        "singleLineTags": ["lends", "typedef", "member"],
         "noMultilineBlocks": true,
         "minimumLengthForMultiline": 80
       }
@@ -89,7 +89,7 @@
     "jsdoc/require-throws": 2,
     "jsdoc/require-yields": 2,
     "jsdoc/require-yields-check": 2,
-    "jsdoc/sort-tags": 2,
+    "jsdoc/sort-tags": "off",
     "jsdoc/tag-lines": [
       2,
       "always",
@@ -98,10 +98,13 @@
         "dropEndLines": true,
         "noEndLines": true,
         "tags": {
-          "param": { "lines": "never" },
-          "function": { "lines": "never" },
-          "returns": { "lines": "never" },
-          "file": { "lines": "never" }
+          "param": { "lines": "any" },
+          "property": { "lines": "any" },
+          "function": { "lines": "any" },
+          "class": { "lines": "never" },
+          "constructs": { "lines": "never" },
+          "returns": { "lines": "any" },
+          "file": { "lines": "any" }
         }
       }
     ],
@@ -111,12 +114,6 @@
     "import/resolver": {
       "webpack": {
         "config": "webpack.config.cjs"
-      }
-    },
-    "jsdoc": {
-      "tagNamePreference": {
-        "param": "param",
-        "returns": "returns"
       }
     }
   }

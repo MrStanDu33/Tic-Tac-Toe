@@ -3,15 +3,66 @@
  * @author DANIELS-ROTH Stan <contact@daniels-roth-stan.fr>
  */
 
-export default class Game {
+// eslint-disable-next-line jsdoc/valid-types
+/** @typedef {import('./Player').Player} Player */
+
+/**
+ * Game logic manager.
+ *
+ * @category Game
+ */
+class Game {
   /**
-   * @function constructor
+   * @description Player's index to whose turn it is.
+   *
+   * @type { number }
+   */
+  playerTurn;
+
+  /**
+   * @description Represent game status.
+   *
+   * @type { boolean }
+   */
+  gameOver;
+
+  /**
+   * @description Game's cells grid.
+   *
+   * @type { object[][] }
+   */
+  grid;
+
+  /**
+   * @description HTML parent element containing game's grid.
+   *
+   * @type { HTMLElement }
+   */
+  parentElement;
+
+  /**
+   * @description Game's grid size.
+   *
+   * @type { number }
+   */
+  size;
+
+  /**
+   * @description Game's players.
+   *
+   * @type { Player[] }
+   */
+  players;
+
+  /**
    * @description Initializes the game and the grid and prints it.
    *
-   * @param { object } options               - Settings object that configures the game.
-   * @param { string } options.parentElement - Game's Parent CSS selector.
-   * @param { number } options.size          - Game's grid columns and rows count.
-   * @param { Array }  options.players       - Game's players list.
+   * @param   { object } options               - Settings object that configures the game.
+   * @param   { string } options.parentElement - Game's Parent CSS selector.
+   * @param   { number } options.size          - Game's grid columns and rows count.
+   * @param   { Player[] }  options.players       - Game's players list.
+   *
+   * @returns { Game } Instance.
    */
   constructor(options) {
     this.validateOptions(options);
@@ -24,6 +75,18 @@ export default class Game {
     this.print();
   }
 
+  /**
+   * @description Validate if all required parameters are present and wether they are correct.
+   *
+   * @param   { object } options               - Settings object that configures the game.
+   * @param   { string } options.parentElement - Game's Parent CSS selector.
+   * @param   { number } options.size          - Game's grid columns and rows count.
+   * @param   { Array }  options.players       - Game's players list.
+   *
+   * @throws  { TypeError|Error } Throws validation error.
+   *
+   * @returns { void }
+   */
   validateOptions(options) {
     if (typeof options !== 'object') throw new TypeError('options must be an object');
 
@@ -41,6 +104,14 @@ export default class Game {
     this.players = options.players;
   }
 
+  /**
+   * @description If the game is not over, get the cell that was clicked, get the current player,
+   *              set the cell's player to the current player, and increment the player turn.
+   *
+   * @param   { event } event - The click event object that was triggered by the user.
+   *
+   * @returns { void }
+   */
   addPlayerToCell(event) {
     if (this.gameOver) return;
 
@@ -56,7 +127,6 @@ export default class Game {
     cellElement.innerText = actualPlayer.marker;
 
     const gameStatus = this.isGameOver();
-    console.log(gameStatus);
     if (gameStatus !== false) {
       this.endGame(gameStatus);
       return;
@@ -64,6 +134,15 @@ export default class Game {
     this.incrementPlayerTurn();
   }
 
+  /**
+   * @description If there is no winner, return false. Otherwise, return the won game status.
+   *
+   * @returns { object|null } An object with the following properties:
+   *                          fullRow: the row that has caused game to be won or null
+   *                          fullCol: the column that has caused game to be won or null
+   *                          fullDiag: the diagonal that has caused game to be won or null
+   *                          tie: true if the board is full and there is no winner or null.
+   */
   isGameOver() {
     const gameStatus = {
       fullRow: this.searchForHorizontalWin(),
@@ -83,6 +162,13 @@ export default class Game {
     return gameStatus;
   }
 
+  /**
+   * @description Returns complete row that caused the game to be won
+   *              or null if no row is full of cells from same player.
+   *
+   * @returns { Array|null } Row of cells that caused the game to be won or
+   *                         null if no row is full.
+   */
   searchForHorizontalWin() {
     const wonRow = this.grid.find((row) => {
       let playersOnRow = null;
@@ -97,6 +183,13 @@ export default class Game {
     return wonRow || null;
   }
 
+  /**
+   * @description Returns complete column that caused the game to be won
+   *              or null if no column is full of cells from same player.
+   *
+   * @returns { Array|null } Column of cells that caused the game to be won or
+   *                         null if no column is full.
+   */
   searchForVerticalWin() {
     for (let colIndex = 0; colIndex < this.size; colIndex += 1) {
       let playersOnCol = null;
@@ -121,6 +214,13 @@ export default class Game {
     return null;
   }
 
+  /**
+   * @description Returns complete diagonal that caused the game to be won
+   *              or null if no diagonal is full of cells from same player.
+   *
+   * @returns { Array|null } Diagonal of cells that caused the game to be won or
+   *                         null if no diagonal is full.
+   */
   searchForDiagonalWin() {
     let playersOnFirstDiag = null;
     const firstDiag = [];
@@ -168,9 +268,9 @@ export default class Game {
   }
 
   /**
-   * @description Test.
+   * @description Test if game is in tie state.
    *
-   * @returns { void }
+   * @returns { true|null } True if game's state is tie, null if game's state is not in tie.
    */
   searchForTie() {
     if (this.searchForHorizontalWin() !== null) return null;
@@ -181,6 +281,16 @@ export default class Game {
     return filledCellsCount === this.size * this.size ? true : null;
   }
 
+  /**
+   * @description Set game status to over and display end game message, regarding game state.
+   *
+   * @param   { object }     gameState          - Game's state object.
+   * @param   { Array|null } gameState.fullRow  - Complete row that caused game to be over.
+   * @param   { Array|null } gameState.fullCol  - Complete column that caused game to be over.
+   * @param   { Array|null } gameState.fullDiag - Complete diagonal that caused game to be over.
+   *
+   * @returns { void }
+   */
   endGame({ fullRow, fullCol, fullDiag }) {
     this.gameOver = true;
     const endGameStatusContainer = document.createElement('h1');
@@ -196,14 +306,29 @@ export default class Game {
     this.parentElement.appendChild(endGameStatusContainer);
   }
 
+  /**
+   * @description Get the player whose turn it is.
+   *
+   * @returns { Player } Player whose turn it is.
+   */
   getCurrentPlayer() {
     return this.players[this.playerTurn];
   }
 
+  /**
+   * @description Increment the player whose turn it is, and set it to 0 if there is no more players.
+   *
+   * @returns { void }
+   */
   incrementPlayerTurn() {
     this.playerTurn = this.playerTurn + 1 !== this.players.length ? this.playerTurn + 1 : 0;
   }
 
+  /**
+   * @description Creates a parent div element, assigns it an id, and then adds the grid rows and cells to it.
+   *
+   * @returns { void }
+   */
   buildGrid() {
     const parent = document.createElement('div');
     parent.id = 'game-grid';
@@ -216,6 +341,13 @@ export default class Game {
     });
   }
 
+  /**
+   * @description Generate rows HTML based on given rows.
+   *
+   * @param   { object[][] } rows - The array of rows that we want to build.
+   *
+   * @returns { string }          A HTML string that represents the game's rows.
+   */
   buildGridRows(rows) {
     return rows
       .map(
@@ -228,6 +360,14 @@ export default class Game {
       .join('');
   }
 
+  /**
+   * @description Generate row's cells HTML based on given row.
+   *
+   * @param   { object[] } row      - Row of cells to generate.
+   * @param   { number }   rowIndex - The index of the row in the grid.
+   *
+   * @returns { string }            A string of HTML that represents all row's cells.
+   */
   // eslint-disable-next-line class-methods-use-this
   buildGridCols(row, rowIndex) {
     return row
@@ -239,6 +379,14 @@ export default class Game {
       .join('');
   }
 
+  /**
+   * @description Creates game's grid as a 2D array of size `this.size` and fills it with cells objects, structured as follows:
+   *              row: row number where the cell is located,
+   *              col: column number where the cell is located,
+   *              player: property that will contain player that has chosen this cell, initialized as null.
+   *
+   * @returns {object[][]} An array of arrays of objects.
+   */
   initializeGrid() {
     const map = [];
     for (let i = 0; i < this.size; i += 1) {
@@ -255,6 +403,14 @@ export default class Game {
     return map;
   }
 
+  /**
+   * @description Update cells if needed, as follow :
+   *              If the cell contains no player, nothing is done.
+   *              If the cell contains a player and the matching cell on the page already contains player, nothing is done.
+   *              Else, we know the cell has been updated to contain a player, so we update the matching cell on the page to contains player mark.
+   *
+   * @returns { void }
+   */
   print() {
     this.grid.forEach((row, rowIndex) => {
       row.forEach((cell, colIndex) => {
@@ -269,3 +425,5 @@ export default class Game {
     });
   }
 }
+
+export default Game;

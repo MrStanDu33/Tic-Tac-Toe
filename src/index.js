@@ -1,3 +1,8 @@
+/**
+ * @file Entry point file.
+ * @author DANIELS-ROTH Stan <contact@daniels-roth-stan.fr>
+ */
+
 import Game from '$src/classes/Game';
 import Player from '$src/classes/Player';
 import '$src/style.css';
