@@ -7,7 +7,7 @@
   
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Tic Tac Toe code documentation Player.js</title>
+  <title>Tic Tac Toe code documentation index.js</title>
 
   <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -92,7 +92,7 @@
             
             <nav>
                 
-                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Global</h3><ul><li><a href="global.html#constructor">constructor</a></li><li><a href="global.html#searchForTie">searchForTie</a></li></ul></div>
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"></div><div class="category"><h2>Game</h2><h3>Classes</h3><ul><li><a href="Game.html">Game</a></li><li><a href="Player.html">Player</a></li></ul></div>
                 
             </nav>
         </div>
@@ -100,7 +100,7 @@
             <div class="content">
                 <header class="page-title">
                     <p>Source</p>
-                    <h1>Player.js</h1>
+                    <h1>index.js</h1>
                 </header>
                 
 
@@ -110,29 +110,30 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>/**
- * @file Player class file.
+ * @file Entry point file.
  * @author DANIELS-ROTH Stan &lt;contact@daniels-roth-stan.fr>
  */
 
-export default class Player {
-  constructor(options) {
-    this.validateOptions(options);
-  }
+import Game from '$src/classes/Game';
+import Player from '$src/classes/Player';
+import '$src/style.css';
 
-  validateOptions(options) {
-    if (typeof options !== 'object') throw new TypeError('options must be an object');
+window.game = new Game({
+  size: 3,
+  parentElement: '#app',
+  players: [
+    new Player({
+      name: 'x',
+      marker: 'X',
+    }),
+    new Player({
+      name: 'o',
+      marker: 'O',
+    }),
+  ],
+});
 
-    if (typeof options.name !== 'string') throw new TypeError('name must be a string');
-    const regexName = /^[a-z]+$/i;
-    if (!regexName.test(options.name)) throw new TypeError('name must only contain letters');
-    this.name = options.name;
-
-    if (typeof options.marker !== 'string') throw new TypeError('marker must be a string');
-    const regexMarker = /^[a-z]$/i;
-    if (!regexMarker.test(options.marker)) throw new TypeError('marker must only contain one letter');
-    this.marker = options.marker;
-  }
-}
+export default window.game;
 </code></pre>
         </article>
     </section>
