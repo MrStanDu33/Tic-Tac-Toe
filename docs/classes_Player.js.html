@@ -121,27 +121,21 @@
  */
 class Player {
   /**
-   * @description Player's name.
-   *
-   * @type { string }
+   * @type { string } - Player's name.
    */
   name;
 
   /**
-   * @description Player's marker to be displayed inside game cells.
-   *
-   * @type { string }
+   * @type { string } - Player's marker to be displayed inside game cells.
    */
   marker;
 
   /**
    * @description Initializes the player.
    *
-   * @param   { object } options        - Settings object that configures the player.
-   * @param   { string } options.name   - Player's name.
-   * @param   { number } options.marker - Player's marker to use in cells.
-   *
-   * @returns { Player }                Player instance.
+   * @param { object } options        - Settings object that configures the player.
+   * @param { string } options.name   - Player's name.
+   * @param { string } options.marker - Player's marker to use in cells.
    */
   constructor(options) {
     this.validateOptions(options);
@@ -152,7 +146,7 @@ class Player {
    *
    * @param   { object } options        - Settings object that configures the player.
    * @param   { string } options.name   - Game's Parent CSS selector.
-   * @param   { number } options.marker - Game's grid columns and rows count.
+   * @param   { string } options.marker - Game's grid columns and rows count.
    *
    * @throws  { TypeError|Error } Throws validation error.
    *
