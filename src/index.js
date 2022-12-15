@@ -7,6 +7,7 @@ import Game from '$src/classes/Game';
 import Player from '$src/classes/Player';
 import '$src/style.css';
 
+// @ts-ignore
 window.game = new Game({
   size: 3,
   parentElement: '#app',
@@ -22,4 +23,5 @@ window.game = new Game({
   ],
 });
 
+// @ts-ignore
 export default window.game;

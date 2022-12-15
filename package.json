@@ -1,5 +1,5 @@
 {
-  "name": "tic-tact-toe",
+  "name": "tic-tac-toe",
   "version": "1.0.0",
   "description": "Little project to explore minimax artificial intelligence algorithm",
   "main": "index.js",

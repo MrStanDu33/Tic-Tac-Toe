@@ -4,7 +4,7 @@
  */
 
 // eslint-disable-next-line jsdoc/valid-types
-/** @typedef {import('./Player').Player} Player */
+/** @typedef {import('./Player').default} Player */
 
 /**
  * Game logic manager.
@@ -13,56 +13,42 @@
  */
 class Game {
   /**
-   * @description Player's index to whose turn it is.
-   *
-   * @type { number }
+   *  @type { number } - Player's index to whose turn it is.
    */
   playerTurn;
 
   /**
-   * @description Represent game status.
-   *
-   * @type { boolean }
+   * @type { boolean } - Represent game status.
    */
   gameOver;
 
   /**
-   * @description Game's cells grid.
-   *
-   * @type { object[][] }
+   * @type { object[][] } - Game's cells grid.
    */
   grid;
 
   /**
-   * @description HTML parent element containing game's grid.
-   *
-   * @type { HTMLElement }
+   * @type { Element } - HTML parent element containing game's grid.
    */
   parentElement;
 
   /**
-   * @description Game's grid size.
-   *
-   * @type { number }
+   * @type { number } - Game's grid size.
    */
   size;
 
   /**
-   * @description Game's players.
-   *
-   * @type { Player[] }
+   * @type { Player[] } - Game's players.
    */
   players;
 
   /**
    * @description Initializes the game and the grid and prints it.
    *
-   * @param   { object }   options               - Settings object that configures the game.
-   * @param   { string }   options.parentElement - Game's Parent CSS selector.
-   * @param   { number }   options.size          - Game's grid columns and rows count.
-   * @param   { Player[] } options.players       - Game's players list.
-   *
-   * @returns { Game }                           Game instance.
+   * @param { object }   options               - Settings object that configures the game.
+   * @param { string }   options.parentElement - Game's Parent CSS selector.
+   * @param { number }   options.size          - Game's grid columns and rows count.
+   * @param { Player[] } options.players       - Game's players list.
    */
   constructor(options) {
     this.validateOptions(options);
@@ -116,6 +102,7 @@ class Game {
     if (this.gameOver) return;
 
     const cellElement = event.target;
+    // @ts-ignore
     const { row, col } = cellElement.dataset;
     const cell = this.grid[row][col];
 
@@ -124,6 +111,7 @@ class Game {
     const actualPlayer = this.getCurrentPlayer();
 
     cell.player = actualPlayer;
+    // @ts-ignore
     cellElement.innerText = actualPlayer.marker;
 
     const gameStatus = this.isGameOver();
@@ -332,7 +320,7 @@ class Game {
   buildGrid() {
     const parent = document.createElement('div');
     parent.id = 'game-grid';
-    parent.innerHTML = this.buildGridRows(this.grid);
+    parent.innerHTML = Game.buildGridRows(this.grid);
 
     this.parentElement.appendChild(parent);
 
@@ -342,18 +330,20 @@ class Game {
   }
 
   /**
+   * @static
+   *
    * @description Generate rows HTML based on given rows.
    *
    * @param   { object[][] } rows - The array of rows that we want to build.
    *
    * @returns { string }          A HTML string that represents the game's rows.
    */
-  buildGridRows(rows) {
+  static buildGridRows(rows) {
     return rows
       .map(
         (row, rowIndex) => /* html */ `
           <div class="game-grid-row" data-row="${rowIndex}">
-            ${this.buildGridCols(row, rowIndex)}
+            ${Game.buildGridCols(row, rowIndex)}
           </div>
         `,
       )
@@ -361,6 +351,8 @@ class Game {
   }
 
   /**
+   * @static
+   *
    * @description Generate row's cells HTML based on given row.
    *
    * @param   { object[] } row      - Row of cells to generate.
@@ -368,8 +360,7 @@ class Game {
    *
    * @returns { string }            A string of HTML that represents all row's cells.
    */
-  // eslint-disable-next-line class-methods-use-this
-  buildGridCols(row, rowIndex) {
+  static buildGridCols(row, rowIndex) {
     return row
       .map(
         (cell, colIndex) => /* html */ `
@@ -419,6 +410,7 @@ class Game {
         const cellElement = document.querySelector(`[data-row="${rowIndex}"][data-col="${colIndex}"]`);
         if (cellElement.classList.contains(`player${cell.player.name}`)) return; // nothing to update
 
+        // @ts-ignore
         cellElement.innerText = cell.player.marker;
         cellElement.classList.add(`player${cell.player.name}`);
       });
